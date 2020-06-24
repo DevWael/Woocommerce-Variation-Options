@@ -37,6 +37,23 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'WCVO_VERSION', '1.0.0' );
 
+define( 'WCVO_DIR', plugin_dir_path( __FILE__ ) );
+define( 'WCVO_URL', plugin_dir_url( __FILE__ ) );
+
+/**
+ * Classes autoloader
+ */
+spl_autoload_register( 'wcvo_autoloader' );
+function wcvo_autoloader( $class_name ) {
+	$classes_dir = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR;
+	$class_file  = $classes_dir . $class_name . '.php';
+	if ( file_exists( $class_file ) ) {
+		require_once $class_file;
+	}
+
+	return false;
+}
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wcvo-activator.php
@@ -62,7 +79,7 @@ register_deactivation_hook( __FILE__, 'deactivate_wcvo' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-wcvo.php';
+require plugin_dir_path( __FILE__ ) . 'includes/wcvo.php';
 
 /**
  * Begins execution of the plugin.
@@ -79,4 +96,5 @@ function run_wcvo() {
 	$plugin->run();
 
 }
+
 run_wcvo();
