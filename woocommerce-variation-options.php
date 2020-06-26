@@ -97,4 +97,13 @@ function run_wcvo() {
 
 }
 
-run_wcvo();
+if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+	run_wcvo();
+} else {
+	add_action( 'admin_notices', 'wcvo_missing_woocommerce' );
+	function wcvo_missing_woocommerce() {
+		$class   = 'notice notice-error is-dismissible';
+		$message = __( 'Woocommerce Variation Options plugin needs woocommerce to be installed and activated', 'wcvo' );
+		printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
+	}
+}
