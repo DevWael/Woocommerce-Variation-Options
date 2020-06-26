@@ -42,7 +42,7 @@
                                 html +=
                                     '<div class="wcvo-variation-option">' +
                                     '<input type="radio" class="wcvo-option" name="wcvo-option" value="' + v.title + '">' +
-                                    '<span class="title">' + v.title + '</span>' +
+                                    '<span class="title"><b>' + v.title + '</b> - ' + currency.currency_symbol + v.price + '</span>' +
                                     '<input type="number" class="wcvo-quantity" name="wcvo-quantity" min="' + v.min + '" max="' + v.max + '" disabled>' +
                                     '</div>';
                             });

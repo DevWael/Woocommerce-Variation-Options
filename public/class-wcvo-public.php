@@ -100,6 +100,12 @@ class Wcvo_Public {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wcvo-public.js', array(
 			'jquery',
 		), $this->version, true );
+
+		if ( class_exists( 'woocommerce' ) ) {
+			wp_localize_script( $this->plugin_name, 'currency', array(
+				'currency_symbol' => get_woocommerce_currency_symbol()
+			) );
+		}
 	}
 
 }
