@@ -70,7 +70,7 @@ class WCVO_Cart_Calculations {
 
 		if ( isset( $cart_item_data['wcvo-option-price'] ) ) {
 			$item_data[] = array(
-				'key'   => __( 'Total Price', 'wcvo' ),
+				'key'   => __( 'Extras Total Price', 'wcvo' ),
 				'value' => wc_clean( $cart_item_data['wcvo-option-price'] )
 			);
 		}
@@ -79,6 +79,7 @@ class WCVO_Cart_Calculations {
 	}
 
 	/**
+	 * get variation price by variation id
 	 * @param $variation_id
 	 *
 	 * @return float|int
