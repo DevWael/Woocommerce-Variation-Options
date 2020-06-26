@@ -53,9 +53,10 @@ class WCVO_Variation_Options {
 	private function cloneable_content( $variation_id, $name = '', $price = '', $min = '', $max = '' ) {
 		?>
         <div class="wcvo-field">
+            <span class="wcvo-delete" title="Delete">x</span>
             <p class="form-row form-row-first">
                 <label><?php
-	                esc_html_e( 'Option Title', 'wcvo' );
+					esc_html_e( 'Option Title', 'wcvo' );
 					?></label>
                 <input type="text" name="wcvo_title[<?php echo esc_attr( $variation_id ); ?>][]" class=""
                        value="<?php echo esc_attr( $name ) ?>">
@@ -71,7 +72,7 @@ class WCVO_Variation_Options {
 
             <p class="form-row form-row-first">
                 <label><?php
-	                esc_html_e( 'Min Quantity', 'wcvo' );
+					esc_html_e( 'Min Quantity', 'wcvo' );
 					?></label>
                 <input type="number" name="wcvo_min[<?php echo esc_attr( $variation_id ); ?>][]"
                        value="<?php echo esc_attr( $min ) ?>"
@@ -79,7 +80,7 @@ class WCVO_Variation_Options {
             </p>
             <p class="form-row form-row-last">
                 <label><?php
-	                esc_html_e( 'Max Quantity', 'wcvo' );
+					esc_html_e( 'Max Quantity', 'wcvo' );
 					?></label>
                 <input type="number" name="wcvo_max[<?php echo esc_attr( $variation_id ); ?>][]" class=""
                        value="<?php echo esc_attr( $max ) ?>"/>
@@ -98,6 +99,9 @@ class WCVO_Variation_Options {
 					$html = ob_get_clean();
 					echo str_replace( array( "\n", "\r" ), '', str_replace( "'", '"', $html ) );
 					?>';
+                $(document).on('click', '.wcvo-delete', function (e) {
+                    $(this).parent().remove();
+                });
                 $(document).on('click', '.wcvo-clone-button-<?php echo esc_attr( $variation_id ) ?> button', function (e) {
                     let var_id = $(this).data('variation-id');
                     contentTemplate = contentTemplate.replace(/{variation_id}/g, var_id);
