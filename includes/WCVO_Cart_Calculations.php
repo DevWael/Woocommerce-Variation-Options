@@ -3,6 +3,14 @@
 
 class WCVO_Cart_Calculations {
 
+	/**
+	 * add user selected option data to cart
+	 * @param $cart_item_data
+	 * @param $product_id
+	 * @param $variation_id
+	 *
+	 * @return mixed
+	 */
 	public function add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
 		if ( $variation_id ) {
 			$variation_options = $this->get_variation_options( $variation_id );
@@ -33,6 +41,10 @@ class WCVO_Cart_Calculations {
 		return $cart_item_data;
 	}
 
+	/**
+	 * calculate the price with selected option price
+	 * @param $cart_obj
+	 */
 	public function calculate_cart_total( $cart_obj ) {
 		if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
 			return; //disable if we are in dashboard
@@ -46,6 +58,13 @@ class WCVO_Cart_Calculations {
 		}
 	}
 
+	/**
+	 * display custom option data on cart item
+	 * @param $item_data
+	 * @param $cart_item_data
+	 *
+	 * @return mixed
+	 */
 	public function display_cart_data( $item_data, $cart_item_data ) {
 		if ( isset( $cart_item_data['wcvo-option-pure-name'] ) ) {
 			$item_data[] = array(
