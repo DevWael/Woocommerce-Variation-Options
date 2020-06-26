@@ -124,6 +124,7 @@ class Wcvo {
 		$this->define_public_hooks();
 		$this->variations_backend();
 		$this->variations_frontend();
+		$this->cart_calculations();
 
 	}
 
@@ -138,6 +139,13 @@ class Wcvo {
 		$variations = new WCVO_Product_Frontend();
 		$this->loader->add_filter( 'woocommerce_available_variation', $variations, 'load_variation_settings' );
 		$this->loader->add_action( 'woocommerce_single_variation', $variations, 'template' );
+	}
+
+	private function cart_calculations() {
+		$cart = new WCVO_Cart_Calculations();
+		$this->loader->add_filter( 'woocommerce_add_cart_item_data', $cart, 'add_cart_item_data', 10, 3 );
+		$this->loader->add_filter( 'woocommerce_get_item_data', $cart, 'display_cart_data', 10, 2 );
+		$this->loader->add_action( 'woocommerce_before_calculate_totals', $cart, 'calculate_cart_total', 10, 1 );
 	}
 
 	/**
