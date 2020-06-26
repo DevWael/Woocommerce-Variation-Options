@@ -44,7 +44,7 @@
                                     '<input type="radio" class="wcvo-option" name="wcvo-option" value="' + v.title + '">' +
                                     '<span class="title">' + v.title + '</span>' +
                                     '<input type="number" class="wcvo-quantity" name="wcvo-quantity" min="' + v.min + '" max="' + v.max + '" disabled>' +
-                                    '</div><br>';
+                                    '</div>';
                             });
                         }
                         $('.wcvo-custom-inputs').html(html);
