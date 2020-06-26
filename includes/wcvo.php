@@ -123,6 +123,7 @@ class Wcvo {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->variations_backend();
+		$this->variations_frontend();
 
 	}
 
@@ -131,6 +132,12 @@ class Wcvo {
 		$this->loader->add_action( 'woocommerce_product_after_variable_attributes', $variations, 'variation_options', 10, 3 );
 		$this->loader->add_action( 'woocommerce_save_product_variation', $variations, 'save_values' );
 		$this->loader->add_action( 'woocommerce_process_product_meta_variable', $variations, 'save_values' );
+	}
+
+	private function variations_frontend() {
+		$variations = new WCVO_Product_Frontend();
+		$this->loader->add_filter( 'woocommerce_available_variation', $variations, 'load_variation_settings' );
+		$this->loader->add_action( 'woocommerce_single_variation', $variations, 'template' );
 	}
 
 	/**
